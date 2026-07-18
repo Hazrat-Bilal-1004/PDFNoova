@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://https://pdf-noova.vercel.app/sitemap.xml
+Sitemap: https://pdf-noova.vercel.app/sitemap.xml
