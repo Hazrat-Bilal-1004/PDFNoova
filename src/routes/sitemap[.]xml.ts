@@ -3,7 +3,7 @@ import type {} from "@tanstack/react-start";
 import { posts } from "../lib/blog-posts";
 
 // TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://www.pdfnoova.com";
 
 interface SitemapEntry {
   path: string;
