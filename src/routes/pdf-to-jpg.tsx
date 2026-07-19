@@ -15,7 +15,7 @@ export const Route = createFileRoute("/pdf-to-jpg")({
       { property: "og:url", content: "/pdf-to-jpg" },
       { property: "og:description", content: "Save PDF pages as JPG images in seconds." },
     ],
-    links: [{ rel: "canonical", href: "/pdf-to-jpg" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/pdf-to-jpg" }],
   }),
   component: PdfToJpgPage,
 });
