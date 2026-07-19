@@ -11,7 +11,7 @@ export const Route = createFileRoute("/jpg-to-pdf")({
       { property: "og:url", content: "/jpg-to-pdf" },
       { property: "og:description", content: "Combine JPG photos into a clean PDF in seconds." },
     ],
-    links: [{ rel: "canonical", href: "/jpg-to-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/jpg-to-pdf" }],
   }),
   component: JpgToPdfPage,
 });
