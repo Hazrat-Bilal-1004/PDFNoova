@@ -8,7 +8,7 @@ export const Route = createFileRoute("/terms")({
       { property: "og:title", content: "Terms of Service · PDFNoova" },
       { property: "og:url", content: "/terms" },
     ],
-    links: [{ rel: "canonical", href: "/terms" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/terms" }],
   }),
   component: Terms,
 });
