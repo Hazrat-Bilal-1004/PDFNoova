@@ -22,7 +22,7 @@ export const Route = createFileRoute("/split-pdf")({
         content: "Split PDFs by page or range. Runs in your browser.",
       },
     ],
-    links: [{ rel: "canonical", href: "/split-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/split-pdf" }],
   }),
   component: SplitPage,
 });
