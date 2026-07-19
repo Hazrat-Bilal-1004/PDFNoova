@@ -15,7 +15,7 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:url", content: "/blog" },
       { property: "og:description", content: "PDF tips, guides, and reviews." },
     ],
-    links: [{ rel: "canonical", href: "/blog" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/blog" }],
   }),
   component: BlogIndex,
 });
