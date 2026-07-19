@@ -21,10 +21,10 @@ export const Route = createFileRoute("/blog/$slug")({
         { property: "og:type", content: "article" },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.description },
-        { property: "og:url", content: `/blog/${params.slug}` },
+        { property: "og:url", content: `https://www.pdfnoova.com/blog/${params.slug}` },
         { property: "article:published_time", content: post.date },
       ],
-      links: [{ rel: "canonical", href: `/blog/${params.slug}` }],
+      links: [{ rel: "canonical", href: `https://www.pdfnoova.com/blog/${params.slug}` }],
       scripts: [
         {
           type: "application/ld+json",
