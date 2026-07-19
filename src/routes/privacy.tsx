@@ -8,7 +8,7 @@ export const Route = createFileRoute("/privacy")({
       { property: "og:title", content: "Privacy Policy · PDFNoova" },
       { property: "og:url", content: "/privacy" },
     ],
-    links: [{ rel: "canonical", href: "/privacy" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/privacy" }],
   }),
   component: Privacy,
 });
