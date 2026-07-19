@@ -15,7 +15,7 @@ export const Route = createFileRoute("/unlock-pdf")({
       { property: "og:url", content: "/unlock-pdf" },
       { property: "og:description", content: "Strip the password from your PDF locally in your browser." },
     ],
-    links: [{ rel: "canonical", href: "/unlock-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/unlock-pdf" }],
   }),
   component: UnlockPage,
 });
