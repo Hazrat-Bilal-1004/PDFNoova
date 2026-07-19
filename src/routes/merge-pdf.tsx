@@ -22,7 +22,7 @@ export const Route = createFileRoute("/merge-pdf")({
         content: "Combine PDFs in your browser. No uploads, no accounts.",
       },
     ],
-    links: [{ rel: "canonical", href: "/merge-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/merge-pdf" }],
   }),
   component: MergePage,
 });
