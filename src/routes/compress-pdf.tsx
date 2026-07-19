@@ -22,7 +22,7 @@ export const Route = createFileRoute("/compress-pdf")({
         content: "Shrink PDFs in your browser. No uploads, no accounts.",
       },
     ],
-    links: [{ rel: "canonical", href: "/compress-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/compress-pdf" }],
   }),
   component: CompressPage,
 });
