@@ -14,7 +14,7 @@ export const Route = createFileRoute("/image-to-pdf")({
       { property: "og:url", content: "/image-to-pdf" },
       { property: "og:description", content: "Combine images into a clean PDF, all in your browser." },
     ],
-    links: [{ rel: "canonical", href: "/image-to-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/image-to-pdf" }],
   }),
   component: ImageToPdfPage,
 });
