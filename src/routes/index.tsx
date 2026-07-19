@@ -33,7 +33,7 @@ export const Route = createFileRoute("/")({
         content: "Free browser-based PDF tools. Merge, split, and manage PDF files without uploads, accounts, or watermarks.",
       },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/" }],
     scripts: [
       {
         type: "application/ld+json",
