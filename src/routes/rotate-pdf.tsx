@@ -22,7 +22,7 @@ export const Route = createFileRoute("/rotate-pdf")({
         content: "Fix page orientation in seconds. Runs in your browser.",
       },
     ],
-    links: [{ rel: "canonical", href: "/rotate-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/rotate-pdf" }],
   }),
   component: RotatePage,
 });
