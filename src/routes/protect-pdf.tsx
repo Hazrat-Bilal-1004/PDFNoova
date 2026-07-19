@@ -15,7 +15,7 @@ export const Route = createFileRoute("/protect-pdf")({
       { property: "og:url", content: "/protect-pdf" },
       { property: "og:description", content: "Password-protect your PDF locally, no accounts, no uploads." },
     ],
-    links: [{ rel: "canonical", href: "/protect-pdf" }],
+    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/protect-pdf" }],
   }),
   component: ProtectPage,
 });
