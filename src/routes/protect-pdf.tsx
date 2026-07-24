@@ -41,25 +41,23 @@ function ProtectPage() {
 
     setBusy(true);
     try {
-      const bytes = await files[0].arrayBuffer();
-      const doc = await CantooPDFDocument.load(bytes, { ignoreEncryption: true });
-      const out = await doc.save({
-        // @ts-expect-error @cantoo/pdf-lib encryption options
-        encrypt: {
-          userPassword: password,
-          ownerPassword: password,
-          permissions: {
-            printing: "highResolution",
-            modifying: false,
-            copying: false,
-            annotating: false,
-            fillingForms: true,
-            contentAccessibility: true,
-            documentAssembly: false,
-          },
-        },
-      });
-      const blob = new Blob([out as BlobPart], { type: "application/pdf" });
+const bytes = await files[0].arrayBuffer();
+const doc = await CantooPDFDocument.load(bytes, { ignoreEncryption: true });
+(doc as unknown as { encrypt: (o: unknown) => void }).encrypt({
+  userPassword: password,
+  ownerPassword: password,
+  permissions: {
+    printing: "highResolution",
+    modifying: false,
+    copying: false,
+    annotating: false,
+    fillingForms: true,
+    contentAccessibility: true,
+    documentAssembly: false,
+  },
+});
+const out = await doc.save({ useObjectStreams: false });
+const blob = new Blob([out as BlobPart], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
