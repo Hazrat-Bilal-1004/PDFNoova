@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
@@ -24,9 +24,7 @@ function NotFoundComponent() {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link to="/" className="btn-primary">
-            Go home
-          </Link>
+          <Link to="/" className="btn-primary">Go home</Link>
         </div>
       </div>
     </div>
@@ -57,9 +55,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
-          <a href="/" className="btn-ghost">
-            Go home
-          </a>
+          <a href="/" className="btn-ghost">Go home</a>
         </div>
       </div>
     </div>
@@ -91,14 +87,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "PDFNoova — Fast, private PDF tools in your browser" },
       {
         name: "twitter:description",
-        content:
-          "Free browser-based PDF tools. Merge, split, and manage PDF files without uploads, accounts, or watermarks.",
+        content: "Free browser-based PDF tools. Merge, split, and manage PDF files without uploads, accounts, or watermarks.",
       },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-      { rel: "alternate icon", type: "image/x-icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/png", href: "/__l5e/assets-v1/bcde4545-6150-45f1-b888-5f1fda199875/pdfnoova-logo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -107,19 +101,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-  {
-    src: "https://www.googletagmanager.com/gtag/js?id=G-ORRNN66S7M",
-    async: true,
-  },
-  {
-    children: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-ORRNN66S7M');
-    `,
-  },
-   {
+      {
+        src: "https://www.googletagmanager.com/gtag/js?id=G-0RRNN66S7M",
+        async: true,
+      },
+      {
+        children:
+          "window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js', new Date());gtag('config', 'G-0RRNN66S7M', { send_page_view: true });",
+      },
+      {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
@@ -132,6 +122,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         }),
       },
     ],
+
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -155,6 +146,21 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsub = router.subscribe("onResolved", ({ toLocation }) => {
+      const w = window as unknown as { gtag?: (...args: unknown[]) => void };
+      if (typeof w.gtag === "function") {
+        w.gtag("event", "page_view", {
+          page_path: toLocation.pathname + toLocation.search,
+          page_location: window.location.href,
+          page_title: document.title,
+        });
+      }
+    });
+    return () => unsub();
+  }, [router]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -168,3 +174,4 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
+
