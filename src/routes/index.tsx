@@ -14,7 +14,11 @@ import {
   Upload,
   MousePointer2,
   Download,
+  Trash2,
+  ArrowUpDown,
+  FileOutput,
 } from "lucide-react";
+
 import { AdSlot } from "../components/AdSlot";
 
 export const Route = createFileRoute("/")({
@@ -33,7 +37,7 @@ export const Route = createFileRoute("/")({
         content: "Free browser-based PDF tools. Merge, split, and manage PDF files without uploads, accounts, or watermarks.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/" }],
+    links: [{ rel: "canonical", href: "/" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -118,9 +122,31 @@ const tools = [
     icon: LockOpen,
     ready: true,
   },
+  {
+    to: "/delete-pdf-pages" as const,
+    label: "Delete PDF Pages",
+    desc: "Remove specific pages from a PDF file.",
+    icon: Trash2,
+    ready: true,
+  },
+  {
+    to: "/reorder-pdf-pages" as const,
+    label: "Reorder PDF Pages",
+    desc: "Rearrange pages into any order you want.",
+    icon: ArrowUpDown,
+    ready: true,
+  },
+  {
+    to: "/extract-pdf-pages" as const,
+    label: "Extract PDF Pages",
+    desc: "Pull chosen pages into a new PDF.",
+    icon: FileOutput,
+    ready: true,
+  },
 ] as const;
 
 function Home() {
+
   return (
     <div>
       {/* Hero */}
