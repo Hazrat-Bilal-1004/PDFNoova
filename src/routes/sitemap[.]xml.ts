@@ -3,7 +3,7 @@ import type {} from "@tanstack/react-start";
 import { posts } from "../lib/blog-posts";
 
 // TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "https://www.pdfnoova.com";
+const BASE_URL = "";
 
 interface SitemapEntry {
   path: string;
@@ -27,6 +27,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/pdf-to-jpg", changefreq: "monthly", priority: "0.9" },
           { path: "/protect-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/unlock-pdf", changefreq: "monthly", priority: "0.9" },
+          { path: "/delete-pdf-pages", changefreq: "monthly", priority: "0.9" },
+          { path: "/reorder-pdf-pages", changefreq: "monthly", priority: "0.9" },
+          { path: "/extract-pdf-pages", changefreq: "monthly", priority: "0.9" },
+
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/privacy", changefreq: "yearly", priority: "0.4" },
           { path: "/terms", changefreq: "yearly", priority: "0.4" },
