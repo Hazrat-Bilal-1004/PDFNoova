@@ -17,6 +17,9 @@ import {
   Trash2,
   ArrowUpDown,
   FileOutput,
+  Stamp,
+  Hash,
+  Calculator,
 } from "lucide-react";
 
 import { AdSlot } from "../components/AdSlot";
@@ -141,6 +144,27 @@ const tools = [
     label: "Extract PDF Pages",
     desc: "Pull chosen pages into a new PDF.",
     icon: FileOutput,
+    ready: true,
+  },
+  {
+    to: "/watermark-pdf" as const,
+    label: "Add Watermark to PDF",
+    desc: "Stamp text across every page of a PDF.",
+    icon: Stamp,
+    ready: true,
+  },
+  {
+    to: "/add-page-numbers" as const,
+    label: "Add Page Numbers",
+    desc: "Number your PDF pages in any position.",
+    icon: Hash,
+    ready: true,
+  },
+  {
+    to: "/pdf-page-counter" as const,
+    label: "PDF Page Counter",
+    desc: "Count pages in one or many PDF files.",
+    icon: Calculator,
     ready: true,
   },
 ] as const;
