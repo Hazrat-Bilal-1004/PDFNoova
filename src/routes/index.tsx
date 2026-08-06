@@ -20,6 +20,9 @@ import {
   Stamp,
   Hash,
   Calculator,
+  Eye,
+  Crop,
+  LayoutGrid,
 } from "lucide-react";
 
 import { AdSlot } from "../components/AdSlot";
@@ -165,6 +168,27 @@ const tools = [
     label: "PDF Page Counter",
     desc: "Count pages in one or many PDF files.",
     icon: Calculator,
+    ready: true,
+  },
+  {
+    to: "/pdf-viewer" as const,
+    label: "PDF Viewer",
+    desc: "Open and read any PDF right in your browser.",
+    icon: Eye,
+    ready: true,
+  },
+  {
+    to: "/crop-pdf" as const,
+    label: "Crop PDF Pages",
+    desc: "Trim margins and white space from pages.",
+    icon: Crop,
+    ready: true,
+  },
+  {
+    to: "/pdf-thumbnail-generator" as const,
+    label: "PDF Thumbnail Generator",
+    desc: "Turn PDF pages into PNG thumbnails.",
+    icon: LayoutGrid,
     ready: true,
   },
 ] as const;
