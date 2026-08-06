@@ -6,6 +6,24 @@ import { ToolLayout } from "../components/ToolLayout";
 import { PdfDropzone } from "../components/PdfDropzone";
 import { tryConsume, getRemaining, formatResetIn, DAILY_LIMIT } from "../lib/rate-limit";
 
+// Some browsers ship a pdf.js build that expects Map.prototype.getOrInsertComputed.
+// Polyfill it so rendering works everywhere.
+function ensureMapPolyfill() {
+  const proto = Map.prototype as any;
+  if (typeof proto.getOrInsertComputed !== "function") {
+    proto.getOrInsertComputed = function (key: unknown, compute: (k: unknown) => unknown) {
+      if (!this.has(key)) this.set(key, compute(key));
+      return this.get(key);
+    };
+  }
+  if (typeof proto.getOrInsert !== "function") {
+    proto.getOrInsert = function (key: unknown, value: unknown) {
+      if (!this.has(key)) this.set(key, value);
+      return this.get(key);
+    };
+  }
+}
+
 export const Route = createFileRoute("/pdf-to-jpg")({
   head: () => ({
     meta: [
@@ -15,7 +33,7 @@ export const Route = createFileRoute("/pdf-to-jpg")({
       { property: "og:url", content: "/pdf-to-jpg" },
       { property: "og:description", content: "Save PDF pages as JPG images in seconds." },
     ],
-    links: [{ rel: "canonical", href: "https://www.pdfnoova.com/pdf-to-jpg" }],
+    links: [{ rel: "canonical", href: "/pdf-to-jpg" }],
   }),
   component: PdfToJpgPage,
 });
@@ -41,6 +59,7 @@ function PdfToJpgPage() {
     }
     setBusy(true);
     try {
+      ensureMapPolyfill();
       const pdfjs = await import("pdfjs-dist");
       // Use worker from CDN matching version
       // @ts-ignore worker options
