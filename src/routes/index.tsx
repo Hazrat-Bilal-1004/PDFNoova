@@ -20,9 +20,11 @@ import {
   Stamp,
   Hash,
   Calculator,
-  
+  Eye,
+  Maximize2,
   Crop,
   LayoutGrid,
+
 } from "lucide-react";
 
 import { AdSlot } from "../components/AdSlot";
@@ -184,7 +186,22 @@ const tools = [
     icon: LayoutGrid,
     ready: true,
   },
+  {
+    to: "/pdf-viewer" as const,
+    label: "PDF Viewer",
+    desc: "Open and read any PDF right in your browser.",
+    icon: Eye,
+    ready: true,
+  },
+  {
+    to: "/resize-pdf" as const,
+    label: "Resize PDF Pages",
+    desc: "Convert pages to A4, Letter or Legal size.",
+    icon: Maximize2,
+    ready: true,
+  },
 ] as const;
+
 
 function Home() {
 
