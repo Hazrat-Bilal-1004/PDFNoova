@@ -33,9 +33,12 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/watermark-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/add-page-numbers", changefreq: "monthly", priority: "0.9" },
           { path: "/pdf-page-counter", changefreq: "monthly", priority: "0.9" },
-          
+
           { path: "/crop-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/pdf-thumbnail-generator", changefreq: "monthly", priority: "0.9" },
+          { path: "/pdf-viewer", changefreq: "monthly", priority: "0.9" },
+          { path: "/resize-pdf", changefreq: "monthly", priority: "0.9" },
+
 
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/privacy", changefreq: "yearly", priority: "0.4" },
