@@ -20,7 +20,7 @@ import {
   Stamp,
   Hash,
   Calculator,
-  Eye,
+  
   Crop,
   LayoutGrid,
 } from "lucide-react";
@@ -168,13 +168,6 @@ const tools = [
     label: "PDF Page Counter",
     desc: "Count pages in one or many PDF files.",
     icon: Calculator,
-    ready: true,
-  },
-  {
-    to: "/pdf-viewer" as const,
-    label: "PDF Viewer",
-    desc: "Open and read any PDF right in your browser.",
-    icon: Eye,
     ready: true,
   },
   {
