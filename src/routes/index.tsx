@@ -340,7 +340,7 @@ function Home() {
                 { k: "0", v: "files uploaded" },
                 { k: "100%", v: "browser-based" },
                 { k: "1h", v: "auto-cleanup" },
-                { k: "5", v: "free ops / day" },
+                { k: "15", v: "free ops / day" },
                 { k: "∞", v: "no account" },
                 { k: "0", v: "trackers" },
               ].map((s) => (
