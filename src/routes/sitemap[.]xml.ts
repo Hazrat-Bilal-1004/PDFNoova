@@ -38,6 +38,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/pdf-thumbnail-generator", changefreq: "monthly", priority: "0.9" },
           { path: "/pdf-viewer", changefreq: "monthly", priority: "0.9" },
           { path: "/resize-pdf", changefreq: "monthly", priority: "0.9" },
+          { path: "/organize-pdf", changefreq: "monthly", priority: "0.9" },
+          { path: "/pdf-text-extractor", changefreq: "monthly", priority: "0.9" },
 
 
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
