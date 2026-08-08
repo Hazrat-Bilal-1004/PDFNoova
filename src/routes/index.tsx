@@ -24,6 +24,8 @@ import {
   Maximize2,
   Crop,
   LayoutGrid,
+  Layers,
+  FileType2,
 
 } from "lucide-react";
 
@@ -200,7 +202,22 @@ const tools = [
     icon: Maximize2,
     ready: true,
   },
+  {
+    to: "/organize-pdf" as const,
+    label: "Organize PDF",
+    desc: "Reorder, rotate and delete pages with previews.",
+    icon: Layers,
+    ready: true,
+  },
+  {
+    to: "/pdf-text-extractor" as const,
+    label: "PDF Text Extractor",
+    desc: "Pull all the text out of a PDF and copy or save it.",
+    icon: FileType2,
+    ready: true,
+  },
 ] as const;
+
 
 
 function Home() {
