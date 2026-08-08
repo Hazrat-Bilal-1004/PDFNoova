@@ -1,10 +1,10 @@
 // Client-side rate limiter for free tool usage.
-// Enforces 5 operations per 24 hours. Stored in localStorage so it
+// Enforces 15 operations per 24 hours. Stored in localStorage so it
 // survives reloads. This is a soft limit — the architecture is ready
 // for a server-backed subscription model to replace it later.
 const KEY = "pdfnoova:usage:v1";
 const WINDOW_MS = 24 * 60 * 60 * 1000;
-export const DAILY_LIMIT = 5;
+export const DAILY_LIMIT = 15;
 
 type Record = { ts: number[] };
 
