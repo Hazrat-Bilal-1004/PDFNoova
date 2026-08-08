@@ -28,7 +28,7 @@ function Terms() {
         <section>
           <h2 className="text-2xl font-semibold mb-2">Free use</h2>
           <p>
-            PDFNoova is free to use with a soft limit of 5 operations per 24 hours per browser to
+            PDFNoova is free to use with a soft limit of 15 operations per 24 hours per browser to
             prevent abuse. We reserve the right to change limits at any time.
           </p>
         </section>
