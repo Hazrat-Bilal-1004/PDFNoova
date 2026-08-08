@@ -390,7 +390,7 @@ function Home() {
           {[
             {
               q: "Is PDFNoova really free?",
-              a: "Yes. All current tools are 100% free with a soft limit of 5 operations per 24 hours to prevent abuse. No credit card, no signup.",
+              a: "Yes. All current tools are 100% free with a soft limit of 15 operations per 24 hours to prevent abuse. No credit card, no signup.",
             },
             {
               q: "Where are my files processed?",
@@ -398,7 +398,7 @@ function Home() {
             },
             {
               q: "Will you add more tools?",
-              a: "Yes — compression, rotation, unlock, PDF-to-Word, image-to-PDF, OCR, watermarks and batch processing are on the roadmap.",
+              a: "Yes — OCR PDF, PDF to Powerpoint, To Excel,and many more are on the roadmap.",
             },
             {
               q: "How do I contact you?",
