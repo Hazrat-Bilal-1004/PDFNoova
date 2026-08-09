@@ -217,7 +217,65 @@ const tools = [
     ready: true,
   },
 ] as const;
-
+const toolGroups = [
+  {
+    title: "Popular PDF Tools",
+    description: "Free online PDF tools for the most common document tasks.",
+    tools: [
+      "/merge-pdf",
+      "/compress-pdf",
+      "/split-pdf",
+    ],
+  },
+  {
+    title: "PDF Converter",
+    description: "Convert PDF files to images and images to PDF.",
+    tools: [
+      "/jpg-to-pdf",
+      "/pdf-to-jpg",
+      "/image-to-pdf",
+    ],
+  },
+  {
+    title: "PDF Page Tools",
+    description: "Manage, organize, and modify individual PDF pages.",
+    tools: [
+      "/rotate-pdf",
+      "/delete-pdf-pages",
+      "/reorder-pdf-pages",
+      "/extract-pdf-pages",
+      "/organize-pdf",
+    ],
+  },
+  {
+    title: "PDF Security",
+    description: "Protect and manage password-protected PDF files.",
+    tools: [
+      "/protect-pdf",
+      "/unlock-pdf",
+    ],
+  },
+  {
+    title: "PDF Editing & Formatting",
+    description: "Edit PDF pages, add watermarks, numbers, and adjust page size.",
+    tools: [
+      "/watermark-pdf",
+      "/add-page-numbers",
+      "/crop-pdf",
+      "/resize-pdf",
+    ],
+  },
+  {
+    title: "PDF Utilities",
+    description: "Useful PDF tools for viewing, extracting, counting, and creating previews.",
+    tools: [
+      "/pdf-text-extractor",
+      "/pdf-page-counter",
+      "/pdf-viewer",
+      "/pdf-thumbnail-generator",
+    ],
+  },
+] as const;
 
 
 function Home() {
@@ -244,28 +302,63 @@ function Home() {
         </div>
       </section>
 
-      {/* Tools */}
-      <section id="tools" className="mx-auto max-w-6xl px-5 mt-6">
+    {/* Tools */}
+<section id="tools" className="mx-auto max-w-6xl px-5 mt-10">
+  <div className="space-y-16">
+    {toolGroups.map((group) => (
+      <div key={group.title}>
+        <div className="mb-6">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
+            {group.title}
+          </h2>
+          <p className="mt-2 text-muted-foreground">
+            {group.description}
+          </p>
+        </div>
+
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {tools.map((t) => {
+          {group.tools.map((path) => {
+            const t = tools.find((tool) => tool.to === path);
+
+            if (!t) return null;
+
             const Icon = t.icon;
+
             const inner = (
-              <div className={`card-soft p-6 h-full flex flex-col ${!t.ready ? "opacity-60" : ""}`}>
+              <div
+                className={`card-soft p-6 h-full flex flex-col ${
+                  !t.ready ? "opacity-60" : ""
+                }`}
+              >
                 <div className="flex items-center gap-3">
                   <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground grid place-items-center shadow-soft">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="text-lg font-semibold">{t.label}</h3>
-                  {!t.ready && <span className="ml-auto text-[10px] uppercase tracking-wider text-muted-foreground">soon</span>}
+
+                  <h3 className="text-lg font-semibold">
+                    {t.label}
+                  </h3>
+
+                  {!t.ready && (
+                    <span className="ml-auto text-[10px] uppercase tracking-wider text-muted-foreground">
+                      soon
+                    </span>
+                  )}
                 </div>
-                <p className="mt-3 text-sm text-muted-foreground">{t.desc}</p>
+
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {t.desc}
+                </p>
+
                 {t.ready && (
                   <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-                    Open tool <ArrowRight className="h-4 w-4" />
+                    Open tool
+                    <ArrowRight className="h-4 w-4" />
                   </span>
                 )}
               </div>
             );
+
             return t.ready ? (
               <Link key={t.label} to={t.to} className="block">
                 {inner}
@@ -275,7 +368,10 @@ function Home() {
             );
           })}
         </div>
-      </section>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* Ad */}
       <section className="mx-auto max-w-6xl px-5 mt-14">
