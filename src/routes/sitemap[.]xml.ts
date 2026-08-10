@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { posts } from "../lib/blog-posts";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://www.pdfnoova.com";
 
 interface SitemapEntry {
   path: string;
@@ -18,13 +17,17 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const staticEntries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
+
+          // PDF tools
           { path: "/merge-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/split-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/compress-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/rotate-pdf", changefreq: "monthly", priority: "0.9" },
+          { path: "/crop-pdf", changefreq: "monthly", priority: "0.9" },
+          { path: "/resize-pdf", changefreq: "monthly", priority: "0.9" },
+          { path: "/organize-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/image-to-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/jpg-to-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/pdf-to-jpg", changefreq: "monthly", priority: "0.9" },
           { path: "/protect-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/unlock-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/delete-pdf-pages", changefreq: "monthly", priority: "0.9" },
@@ -33,19 +36,16 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/watermark-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/add-page-numbers", changefreq: "monthly", priority: "0.9" },
           { path: "/pdf-page-counter", changefreq: "monthly", priority: "0.9" },
-
-          { path: "/crop-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/pdf-thumbnail-generator", changefreq: "monthly", priority: "0.9" },
-          { path: "/pdf-viewer", changefreq: "monthly", priority: "0.9" },
-          { path: "/resize-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/organize-pdf", changefreq: "monthly", priority: "0.9" },
           { path: "/pdf-text-extractor", changefreq: "monthly", priority: "0.9" },
+          { path: "/pdf-viewer", changefreq: "monthly", priority: "0.9" },
 
-
+          // Content & legal
           { path: "/blog", changefreq: "weekly", priority: "0.7" },
           { path: "/privacy", changefreq: "yearly", priority: "0.4" },
           { path: "/terms", changefreq: "yearly", priority: "0.4" },
         ];
+
         const postEntries: SitemapEntry[] = posts.map((p) => ({
           path: `/blog/${p.slug}`,
           lastmod: p.date,
