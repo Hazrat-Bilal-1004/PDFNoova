@@ -111,13 +111,7 @@ const tools = [
     icon: FileImage,
     ready: true,
   },
-  {
-    to: "/pdf-to-jpg" as const,
-    label: "PDF to JPG",
-    desc: "Export every PDF page as a JPG image.",
-    icon: Download,
-    ready: true,
-  },
+
   {
     to: "/protect-pdf" as const,
     label: "Protect PDF",
