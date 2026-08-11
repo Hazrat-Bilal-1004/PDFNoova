@@ -11,74 +11,102 @@ interface SitemapEntry {
   priority?: string;
 }
 
+/**
+ * Escapes XML special characters so the sitemap stays valid even if a slug
+ * or path ever contains &, <, >, ", or '.
+ */
+function escapeXml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+/**
+ * Normalizes a date string to W3C datetime format (YYYY-MM-DD).
+ * Returns undefined if the input is missing or unparsable, so a bad
+ * date in blog-posts.ts can't silently corrupt the sitemap.
+ */
+function toW3CDate(value?: string): string | undefined {
+  if (!value) return undefined;
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return undefined;
+  return d.toISOString().slice(0, 10);
+}
+
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const staticEntries: SitemapEntry[] = [
-          { path: "/", changefreq: "weekly", priority: "1.0" },
+        try {
+          const staticEntries: SitemapEntry[] = [
+            { path: "/", changefreq: "weekly", priority: "1.0" },
+            // PDF tools
+            { path: "/merge-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/split-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/compress-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/rotate-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/crop-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/resize-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/organize-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/image-to-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/jpg-to-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/protect-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/unlock-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/delete-pdf-pages", changefreq: "monthly", priority: "0.9" },
+            { path: "/reorder-pdf-pages", changefreq: "monthly", priority: "0.9" },
+            { path: "/extract-pdf-pages", changefreq: "monthly", priority: "0.9" },
+            { path: "/watermark-pdf", changefreq: "monthly", priority: "0.9" },
+            { path: "/add-page-numbers", changefreq: "monthly", priority: "0.9" },
+            { path: "/pdf-page-counter", changefreq: "monthly", priority: "0.9" },
+            { path: "/pdf-thumbnail-generator", changefreq: "monthly", priority: "0.9" },
+            { path: "/pdf-text-extractor", changefreq: "monthly", priority: "0.9" },
+            { path: "/pdf-viewer", changefreq: "monthly", priority: "0.9" },
+            // Content & legal
+            { path: "/blog", changefreq: "weekly", priority: "0.7" },
+            { path: "/privacy", changefreq: "yearly", priority: "0.4" },
+            { path: "/terms", changefreq: "yearly", priority: "0.4" },
+          ];
 
-          // PDF tools
-          { path: "/merge-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/split-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/compress-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/rotate-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/crop-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/resize-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/organize-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/image-to-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/jpg-to-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/protect-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/unlock-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/delete-pdf-pages", changefreq: "monthly", priority: "0.9" },
-          { path: "/reorder-pdf-pages", changefreq: "monthly", priority: "0.9" },
-          { path: "/extract-pdf-pages", changefreq: "monthly", priority: "0.9" },
-          { path: "/watermark-pdf", changefreq: "monthly", priority: "0.9" },
-          { path: "/add-page-numbers", changefreq: "monthly", priority: "0.9" },
-          { path: "/pdf-page-counter", changefreq: "monthly", priority: "0.9" },
-          { path: "/pdf-thumbnail-generator", changefreq: "monthly", priority: "0.9" },
-          { path: "/pdf-text-extractor", changefreq: "monthly", priority: "0.9" },
-          { path: "/pdf-viewer", changefreq: "monthly", priority: "0.9" },
+          const postEntries: SitemapEntry[] = posts.map((p) => ({
+            path: `/blog/${p.slug}`,
+            lastmod: toW3CDate(p.date),
+            changefreq: "monthly",
+            priority: "0.6",
+          }));
 
-          // Content & legal
-          { path: "/blog", changefreq: "weekly", priority: "0.7" },
-          { path: "/privacy", changefreq: "yearly", priority: "0.4" },
-          { path: "/terms", changefreq: "yearly", priority: "0.4" },
-        ];
+          const urls = [...staticEntries, ...postEntries].map((e) =>
+            [
+              `  <url>`,
+              `    <loc>${escapeXml(`${BASE_URL}${e.path}`)}</loc>`,
+              e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
+              e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
+              e.priority ? `    <priority>${e.priority}</priority>` : null,
+              `  </url>`,
+            ]
+              .filter(Boolean)
+              .join("\n"),
+          );
 
-        const postEntries: SitemapEntry[] = posts.map((p) => ({
-          path: `/blog/${p.slug}`,
-          lastmod: p.date,
-          changefreq: "monthly",
-          priority: "0.6",
-        }));
+          const xml = [
+            `<?xml version="1.0" encoding="UTF-8"?>`,
+            `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
+            ...urls,
+            `</urlset>`,
+          ].join("\n");
 
-        const urls = [...staticEntries, ...postEntries].map((e) =>
-          [
-            `  <url>`,
-            `    <loc>${BASE_URL}${e.path}</loc>`,
-            e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
-            e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
-            e.priority ? `    <priority>${e.priority}</priority>` : null,
-            `  </url>`,
-          ]
-            .filter(Boolean)
-            .join("\n"),
-        );
-
-        const xml = [
-          `<?xml version="1.0" encoding="UTF-8"?>`,
-          `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`,
-          ...urls,
-          `</urlset>`,
-        ].join("\n");
-
-        return new Response(xml, {
-          headers: {
-            "Content-Type": "application/xml",
-            "Cache-Control": "public, max-age=3600",
-          },
-        });
+          return new Response(xml, {
+            headers: {
+              "Content-Type": "application/xml; charset=UTF-8",
+              "Cache-Control": "public, max-age=3600",
+            },
+          });
+        } catch (err) {
+          console.error("Failed to generate sitemap.xml:", err);
+          return new Response("Internal Server Error", { status: 500 });
+        }
       },
     },
   },
